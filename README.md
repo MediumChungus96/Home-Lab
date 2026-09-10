@@ -31,15 +31,20 @@ Attack traffic is kept fully isolated from the home network using VMware's Virtu
 
 Connectivity between all three VMs has been verified via ping.
 
-Because the isolated network has no route to the host, log forwarding to Wazuh is handled over a separate management path (see below) rather than the attack network itself, so monitoring traffic and attack traffic never mix.
+Because the isolated network has no route to the host, log forwarding to Wazuh is handled over a separate management network rather than the attack network itself, so monitoring traffic and attack traffic never mix. Fedora Workstation and Fedora Server each have a second NIC on VMnet1 (Host-only, connected to the host) dedicated to this purpose. Kali does not need this second NIC, since it's the attacker rather than something being monitored.
+
+| VM | Management IP (VMnet1) |
+|---|---|
+| Fedora Workstation | 192.168.236.128 |
+| Fedora Server | 192.168.236.129 |
 
 ## Detection Stack
 
-Wazuh 4.12.0 runs in Docker on the host machine. Sysmon and Filebeat are configured on the target VMs to collect Windows/Linux event data and forward it to the Wazuh manager for correlation and alerting.
+Wazuh 4.12.0 runs in Docker on the host machine. Wazuh agents are installed on Fedora Workstation and Fedora Server, forwarding event data to the manager over the VMnet1 management network for correlation and alerting.
 
 ## Exercises Completed
 
-- Deployed and troubleshot the Wazuh stack end-to-end, including resolving Filebeat authentication failures.
+- Deployed the Wazuh manager, then installed and registered agents on both target VMs, verifying each shows active in the dashboard.
 - Ran SSH brute-force simulations against lab targets using Hydra, then reviewed and triaged the resulting alerts in Wazuh.
 
 ## Planned Additions
