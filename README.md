@@ -21,19 +21,14 @@ Hypervisor: VMware Workstation, running on a laptop (8 cores, 16GB RAM), so each
 Attack traffic is kept fully isolated from the home network using VMware's Virtual Network Editor:
 
 - All lab VMs sit on a dedicated Host-only network (VMnet0), with no host virtual adapter attached. This means the VMs can reach each other, but there is no path from the lab to the host machine or the physical network.
-- IP addressing is static rather than DHCP-assigned, to keep the topology predictable during exercises.
-
-| VM | IP Address |
-|---|---|
-| Kali Linux | xxx.xxx.xxx.xxx |
-| Fedora Workstation | 192.168.xxx.xxx |
-| Fedora Server | 192.168.xxx.xxx |
+- IP addressing will be static rather than DHCP-assigned, to keep the topology predictable during exercises. (Addresses to be finalized once all VMs are running together.)
 
 Because the isolated network has no route to the host, log forwarding to Wazuh is handled over a separate management path (see below) rather than the attack network itself, so monitoring traffic and attack traffic never mix.
 
 ## Detection Stack
 
 Wazuh 4.12.0 runs in Docker on the host machine. Sysmon and Filebeat are configured on the target VMs to collect Windows/Linux event data and forward it to the Wazuh manager for correlation and alerting.
+
 
 ## Planned Additions
 
