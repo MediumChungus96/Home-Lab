@@ -45,7 +45,7 @@ Wazuh 4.12.0 runs in Docker on the Windows 11 host. Wazuh agents are installed o
 ## Exercises Completed
 
 - Deployed the Wazuh manager, then installed and registered agents on both target VMs, verifying each shows active in the dashboard.
-- Ran SSH brute-force simulations against lab targets using Hydra, then reviewed and triaged the resulting alerts in Wazuh.
+- Set up and hardened SSH on Fedora Server (key-only authentication, root login disabled). See [write-up](docs/2026-09-28-ssh-hardening-fedora-server.md).
 
 ## Write-ups
 
@@ -55,3 +55,4 @@ Wazuh 4.12.0 runs in Docker on the Windows 11 host. Wazuh agents are installed o
 
 - Write-ups of individual exercises (attack performed, detection generated, analysis of the alert) under a `/docs` folder.
 - Additional detection rules and use cases as the lab grows.
+- SSH brute-force simulation with Hydra from Kali, with Wazuh alert triage write-up.
