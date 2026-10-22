@@ -13,7 +13,7 @@ Hypervisor: VMware Workstation, running on a laptop (8 cores, 16GB RAM), so each
 | VM | Role | RAM | Cores |
 |---|---|---|---|
 | Kali Linux | Attacker box, used to run tools like Hydra against lab targets | 4GB | 2 |
-| Fedora Workstation | Simulated end-user endpoint / attack target | 3GB | 2 |
+| Fedora Workstation | Simulated end-user endpoint / attack target | 4GB | 2 |
 | Fedora Server | Log source / server-side target | 2GB | 2 |
 
 ## Network Design
@@ -40,12 +40,16 @@ Because the isolated network has no route to the host, log forwarding to Wazuh i
 
 ## Detection Stack
 
-Wazuh 4.12.0 runs in Docker on the host machine. Wazuh agents are installed on Fedora Workstation and Fedora Server, forwarding event data to the manager over the VMnet1 management network for correlation and alerting.
+Wazuh 4.12.0 runs in Docker on the Windows 11 host. Wazuh agents are installed on Fedora Workstation and Fedora Server, forwarding event data to the manager over the VMnet1 management network for correlation and alerting.
 
 ## Exercises Completed
 
 - Deployed the Wazuh manager, then installed and registered agents on both target VMs, verifying each shows active in the dashboard.
 - Ran SSH brute-force simulations against lab targets using Hydra, then reviewed and triaged the resulting alerts in Wazuh.
+
+## Write-ups
+
+- [SSH Setup and Hardening on Fedora Server (Sep 28, 2026)](docs/2026-09-28-ssh-hardening-fedora-server.md)
 
 ## Planned Additions
 
